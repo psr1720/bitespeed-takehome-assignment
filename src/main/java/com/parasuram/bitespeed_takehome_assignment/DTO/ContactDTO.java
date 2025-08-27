@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Contact {
+public class ContactDTO {
     private Long primaryContactId;
     private List<String> emails;
     private List<String> phoneNumbers;

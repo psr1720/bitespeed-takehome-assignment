@@ -1,5 +1,6 @@
 package com.parasuram.bitespeed_takehome_assignment.DTO;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -8,5 +9,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class IdentityResponseDTO {
-    private Contact contact;
+    @JsonProperty("contact")
+    private ContactDTO contactDTO;
 }

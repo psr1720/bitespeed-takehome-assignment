@@ -1,6 +1,6 @@
 package com.parasuram.bitespeed_takehome_assignment.controller;
 
-import com.parasuram.bitespeed_takehome_assignment.DTO.Contact;
+import com.parasuram.bitespeed_takehome_assignment.DTO.ContactDTO;
 import com.parasuram.bitespeed_takehome_assignment.DTO.IdentifyRequestDTO;
 import com.parasuram.bitespeed_takehome_assignment.DTO.IdentityResponseDTO;
 import com.parasuram.bitespeed_takehome_assignment.service.ContactService;
@@ -19,10 +19,10 @@ public class ContactController {
 
     @PostMapping("/identify")
     public ResponseEntity<IdentityResponseDTO> identity(@Validated @RequestBody IdentifyRequestDTO requestDTO) {
-        IdentityResponseDTO responseDTO = new IdentityResponseDTO();
-        Contact contact = new Contact();
-        responseDTO.setContact(contact);
         contactService.identity(requestDTO.getEmailId(), requestDTO.getPhoneNumber());
+        ContactDTO contactDTO = new ContactDTO();
+        IdentityResponseDTO responseDTO = new IdentityResponseDTO();
+        responseDTO.setContactDTO(contactDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
         //TODO - Return appropriate response if both email and phNo are missing
         //TODO - Implement actual logic to insert and update in the service layer and persist with repo layer
