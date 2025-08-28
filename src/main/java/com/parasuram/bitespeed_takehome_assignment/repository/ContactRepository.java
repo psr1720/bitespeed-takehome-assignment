@@ -10,12 +10,12 @@ import java.util.List;
 
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, Integer> {
-    @Query(value = "SELECT * FROM Contacts WHERE (email_id = :email OR phone_number = :phoneNumber) AND link_precedence = 'primary'", nativeQuery = true)
+    @Query(value = "SELECT * FROM contacts WHERE (email_id = :email OR phone_number = :phoneNumber) AND link_precedence = 'primary'", nativeQuery = true)
     List<Contact> findPrimaryContactsByEmailOrPhone(@Param("email") String email, @Param("phoneNumber") String phoneNumber);
 
-    @Query(value = "SELECT * FROM Contacts WHERE (email_id = :email OR phone_number = :phoneNumber) AND link_precedence = 'secondary'", nativeQuery = true)
+    @Query(value = "SELECT * FROM contacts WHERE (email_id = :email OR phone_number = :phoneNumber) AND link_precedence = 'secondary'", nativeQuery = true)
     List<Contact> findSecondaryContactsByEmailOrPhone(@Param("email") String email, @Param("phoneNumber") String phoneNumber);
 
-    @Query(value = "SELECT * FROM Contacts WHERE linked_id = :linkedId", nativeQuery = true)
+    @Query(value = "SELECT * FROM contacts WHERE linked_id = :linkedId", nativeQuery = true)
     List<Contact> findAllByLinkedId(@Param("linkedId") Integer linkedId);
 }

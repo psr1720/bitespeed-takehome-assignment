@@ -18,7 +18,7 @@ public class ContactController {
     ContactService contactService;
 
     @PostMapping("/identify")
-    public ResponseEntity<IdentityResponseDTO> identity(@Validated @RequestBody IdentifyRequestDTO requestDTO) {
+    public ResponseEntity<IdentityResponseDTO> identify(@Validated @RequestBody IdentifyRequestDTO requestDTO) {
         String email = requestDTO.getEmailId();
         String phoneNo = requestDTO.getPhoneNumber();
         if(email.isBlank() && phoneNo.isBlank()){
