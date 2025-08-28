@@ -15,7 +15,7 @@ Request body looks like this:
 
 ### Usage instructions.
 #### Prerequisites:
-* Java version 21 or above
+* Java version 17 or above
 * maven build tool
 * local mysql server(can you in memory db otherwise)
 
