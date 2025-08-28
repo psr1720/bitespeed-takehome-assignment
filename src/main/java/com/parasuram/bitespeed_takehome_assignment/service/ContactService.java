@@ -76,12 +76,12 @@ public class ContactService {
     private ContactDTO insertSecondaryContact(String emailId, String phoneNo, List<Contact> primaryMatches, List<Contact> secondaryMatches){
         Contact primaryContact = null;
         if (!primaryMatches.isEmpty()) {
-            primaryContact = primaryMatches.getFirst();
+            primaryContact = primaryMatches.get(0);
             insertContact(emailId, phoneNo, false, primaryContact.getId()); // insert the secondary contact
         }
         else{
-            insertContact(emailId, phoneNo, false, secondaryMatches.getFirst().getLinkedId());
-            Optional<Contact> pContact = contactRepository.findById(secondaryMatches.getFirst().getLinkedId());
+            insertContact(emailId, phoneNo, false, secondaryMatches.get(0).getLinkedId());
+            Optional<Contact> pContact = contactRepository.findById(secondaryMatches.get(0).getLinkedId());
             if (pContact.isPresent()) primaryContact = pContact.get();
         }
         return responseBuilder(primaryContact);
@@ -151,10 +151,10 @@ public class ContactService {
     // helper function to find the primary contact of the give request parameters
     private Contact getPrimaryContact(List<Contact> primaryMatches, List<Contact> secondaryMatches) {
         if (!primaryMatches.isEmpty()){
-            return primaryMatches.getFirst();
+            return primaryMatches.get(0);
         }
         else {
-            int primaryContactID = secondaryMatches.getFirst().getLinkedId();
+            int primaryContactID = secondaryMatches.get(0).getLinkedId();
             Optional<Contact> contact = contactRepository.findById(primaryContactID);
             if (contact.isPresent()){
                 return contact.get();
