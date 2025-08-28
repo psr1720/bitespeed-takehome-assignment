@@ -19,8 +19,12 @@ public class ContactController {
 
     @PostMapping("/identify")
     public ResponseEntity<IdentityResponseDTO> identity(@Validated @RequestBody IdentifyRequestDTO requestDTO) {
-        contactService.identity(requestDTO.getEmailId(), requestDTO.getPhoneNumber());
-        ContactDTO contactDTO = new ContactDTO();
+        String email = requestDTO.getEmailId();
+        String phoneNo = requestDTO.getPhoneNumber();
+        if(email.isBlank() && phoneNo.isBlank()){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+        ContactDTO contactDTO= contactService.identify(email, phoneNo);
         IdentityResponseDTO responseDTO = new IdentityResponseDTO();
         responseDTO.setContactDTO(contactDTO);
         return new ResponseEntity<>(responseDTO, HttpStatus.OK);
